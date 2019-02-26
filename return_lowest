@@ -1,0 +1,26 @@
+#######################
+#Beta 0.2
+return_lowest <- function(x,y=3){
+  odds_input <- function(x){
+    name <- c(x[seq(1,length(x),2)])
+    odds <- c(as.numeric(as.character(x[seq(2,length(x),2)])))
+    matrix <- cbind(name,odds)
+    df <- as.data.frame(matrix)
+  }
+  return_2 <- function(x,y){
+    z <- as.numeric(as.character(sort(x[,2])))
+    if (y==3) {
+      pass2 <- z[1]*z[2]+z[1]*z[3]+z[2]*z[3]
+      pass3 <- z[1]*z[2]*z[3]*1.05
+      list(x,至少過三關時選擇串幾關=c("兩關"=pass2,"三關"=pass3))
+    }
+    else if (y==4){
+      pass2 <- z[1]*z[2]+z[1]*z[3]+z[1]*z[4]+z[2]*z[3]+z[2]*z[4]+z[3]*z[4]
+      pass3 <- (z[1]*z[2]*z[3]+z[1]*z[2]*z[4]+z[1]*z[3]*z[4]+z[2]*z[3]*z[4])*1.05
+      list(x,至少過四關時選擇串幾關=c("兩關"=pass2,"三關"=pass3))
+    }
+  }
+  odds_df <- odds_input(x)
+  re <- return_2 (odds_df,y)
+  re
+}
